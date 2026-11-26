@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "deploy": {
+    "command": "",
+    "guide": ".wally/docs/devops/test-env-deploy.md",
+    "verify": "",
+    "rollback": ""
+  },
+  "it": {
+    "command": "",
+    "guide": ".wally/docs/integration_test/integration_test.md",
+    "success_criteria": ""
+  },
+  "readiness": "pending",
+  "gaps": [
+    "Deploy：仓库为纯文档资源列表，无业务源码，未发现 Makefile、Dockerfile、docker-compose、包管理文件、构建或部署脚本，缺少真实部署入口命令。",
+    "Deploy：未提供测试环境地址、资源归属与部署授权边界，缺少目标环境信息。",
+    "Deploy：未提供依赖、配置与凭证的获取方式（仅记录来源，不记录明文）。",
+    "Deploy：缺少就绪与生效验证命令及通过判据，以及回滚命令与触发条件。",
+    "IT：未发现测试框架、runner、用例目录、fixture 或测试脚本，缺少真实集成测试入口命令。",
+    "IT：未提供测试环境、鉴权来源、健康检查、数据隔离与清理方式。",
+    "IT：缺少逐用例与汇总报告位置、失败与跳过判定及覆盖业务结果的验收判据。"
+  ]
+}
