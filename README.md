@@ -1055,4 +1055,17 @@
 
 <br/>
 
+## Welcome 接口（nova / cinder 联动示例）
+
+`nova` 与 `cinder` 两个组件各提供一个 `GET /welcome` REST 端点，用于演示组件间的相互调用与日志联动：
+
+- 访问 `nova` 的 `/welcome`：`nova` 在自身日志打印 `welcome`，并调用 `cinder` 的 `/welcome`；`cinder` 收到后也在自身日志打印 `welcome`。
+- 访问 `cinder` 的 `/welcome`：行为对称，`cinder` 打印后调用 `nova`，`nova` 也打印 `welcome`。
+- 防递归：主动回呼时携带请求头 `X-Welcome-Forwarded: 1`；被调用方见到该头后只打印日志、不再回呼，避免无限循环。
+- 对端地址与超时通过配置项（`[welcome] peer_welcome_url` / `request_timeout`）提供，默认使用回环地址，可按部署环境覆盖；对端不可达时记录 warning 并降级返回成功。
+
+相关实现见 `nova` 与 `cinder` 仓库的 `welcome` API 模块及其单元测试。
+
+<br/>
+
 [![CC0](https://i.creativecommons.org/p/zero/1.0/88x31.png)](https://creativecommons.org/publicdomain/zero/1.0/)
